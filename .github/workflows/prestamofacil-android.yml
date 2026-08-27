@@ -96,6 +96,11 @@ jobs:
             cat "$f"
             echo
           done
+          for f in target/gluonfx/aarch64-android/gensrc/android/AndroidManifest.xml target/gluonfx/aarch64-android/gvm/android_project/app/src/main/AndroidManifest.xml; do
+            echo "===== $f ====="
+            cat "$f" 2>/dev/null || echo "(no existe)"
+            echo
+          done
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
