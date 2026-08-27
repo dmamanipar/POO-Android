@@ -52,7 +52,11 @@ public class Configuracion {
         try (Reader r = Files.newBufferedReader(archivo.toPath(), StandardCharsets.UTF_8)) {
             Configuracion c = gson.fromJson(r, Configuracion.class);
             return c != null ? c : new Configuracion();
-        } catch (IOException e) {
+        } catch (IOException | RuntimeException e) {
+            // RuntimeException incluye fallos de Gson (p.ej. reflexión no
+            // registrada para native-image): sin este catch amplio, un fallo
+            // aquí se ve igual que "nunca se guardó nada".
+            System.err.println("No se pudo leer " + ARCHIVO + ": " + e);
             return new Configuracion();
         }
     }

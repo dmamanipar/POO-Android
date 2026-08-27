@@ -124,7 +124,12 @@ public class ConfiguracionView extends View {
         config.setUrlWebApp(url);
         config.setToken(token);
         config.setMinutosRecordatorioPorDefecto(campoMinutosRecordatorio.getValue());
-        config.guardar();
+        try {
+            config.guardar();
+        } catch (RuntimeException e) {
+            estado.setText("No se pudo guardar la configuración: " + e.getMessage());
+            return;
+        }
 
         if (!sincronizarDespues) {
             estado.setText("Configuración guardada.");

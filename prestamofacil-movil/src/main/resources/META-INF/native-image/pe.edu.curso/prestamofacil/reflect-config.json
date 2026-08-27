@@ -1,0 +1,97 @@
+[
+  {
+    "name": "pe.edu.curso.prestamofacil.util.Configuracion",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true,
+    "unsafeAllocated": true
+  },
+  {
+    "name": "pe.edu.curso.prestamofacil.model.EntidadSincronizable",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true,
+    "unsafeAllocated": true
+  },
+  {
+    "name": "pe.edu.curso.prestamofacil.model.PersonaBase",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true,
+    "unsafeAllocated": true
+  },
+  {
+    "name": "pe.edu.curso.prestamofacil.model.Administrador",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true,
+    "unsafeAllocated": true
+  },
+  {
+    "name": "pe.edu.curso.prestamofacil.model.UsuarioPrestatario",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true,
+    "unsafeAllocated": true
+  },
+  {
+    "name": "pe.edu.curso.prestamofacil.model.Objeto",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true,
+    "unsafeAllocated": true
+  },
+  {
+    "name": "pe.edu.curso.prestamofacil.model.Objeto$EstadoObjeto",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "pe.edu.curso.prestamofacil.model.Categoria",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true,
+    "unsafeAllocated": true
+  },
+  {
+    "name": "pe.edu.curso.prestamofacil.model.Prestamo",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true,
+    "unsafeAllocated": true
+  },
+  {
+    "name": "pe.edu.curso.prestamofacil.model.DetallePrestamo",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true,
+    "unsafeAllocated": true
+  },
+  {
+    "name": "pe.edu.curso.prestamofacil.model.Alerta",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true,
+    "unsafeAllocated": true
+  },
+  {
+    "name": "pe.edu.curso.prestamofacil.model.OperacionPendiente",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true,
+    "unsafeAllocated": true
+  },
+  {
+    "name": "pe.edu.curso.prestamofacil.model.TipoOperacion",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "pe.edu.curso.prestamofacil.model.EstadoPrestamo",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  }
+]
