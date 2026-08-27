@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>pe.edu.curso</groupId>
+  <artifactId>prestamofacil</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- Verify these against the current Gluon documentation before building;
+         Gluon/JavaFX/Attach versions move independently and this file may be
+         written against an older release than what is current when you build. -->
+    <javafx.version>21.0.2</javafx.version>
+    <attach.version>4.0.22</attach.version>
+    <gluonfx.plugin.version>1.0.29</gluonfx.plugin.version>
+    <gson.version>2.11.0</gson.version>
+    <junit.version>5.10.2</junit.version>
+    <main.class>pe.edu.curso.prestamofacil.Main</main.class>
+  </properties>
+
+  <!-- charm-glisten no se publica en Maven Central: solo vive en el Nexus de
+       Gluon. Los módulos de Attach sí están en Central (ver attach.version). -->
+  <repositories>
+    <repository>
+      <id>gluon-releases</id>
+      <url>https://nexus.gluonhq.com/nexus/content/repositories/releases</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>${javafx.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.gluonhq</groupId>
+      <artifactId>charm-glisten</artifactId>
+      <version>6.2.3</version>
+    </dependency>
+
+    <!-- Gluon Attach modules actually used by this project. No hay un BOM
+         "com.gluonhq.attach:attach" publicado (el que traía este pom.xml no
+         existe en ningún repositorio); cada módulo fija su propia versión,
+         que es como Gluon los publica actualmente en Maven Central. -->
+    <dependency>
+      <groupId>com.gluonhq.attach</groupId>
+      <artifactId>storage</artifactId>
+      <version>${attach.version}</version>
+    </dependency>
+    <!-- Declarado explícitamente en compile scope: "storage" lo trae solo en
+         runtime scope, pero FabricaPlataforma usa Platform.isDesktop() en
+         tiempo de compilación. -->
+    <dependency>
+      <groupId>com.gluonhq.attach</groupId>
+      <artifactId>util</artifactId>
+      <version>${attach.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.gluonhq.attach</groupId>
+      <artifactId>lifecycle</artifactId>
+      <version>${attach.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.gluonhq.attach</groupId>
+      <artifactId>connectivity</artifactId>
+      <version>${attach.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.gluonhq.attach</groupId>
+      <artifactId>local-notifications</artifactId>
+      <version>${attach.version}</version>
+    </dependency>
+    <!-- No la usa código de la app directamente, pero charm-glisten's AppBar
+         la requiere en tiempo de ejecución (DeviceSettings.hasNotch) — sin
+         ella la app arranca hasta la primera vista y falla con
+         NoClassDefFoundError: com/gluonhq/attach/display/DisplayService. -->
+    <dependency>
+      <groupId>com.gluonhq.attach</groupId>
+      <artifactId>display</artifactId>
+      <version>${attach.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>${gson.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>0.0.8</version>
+        <configuration>
+          <mainClass>${main.class}</mainClass>
+        </configuration>
+      </plugin>
+
+      <!-- Native compilation to Android/iOS/Desktop. Command names below are
+           current as of writing but you MUST confirm them against the Gluon
+           documentation for the plugin version you actually pin, since this
+           plugin's goals have changed across releases. -->
+      <plugin>
+        <groupId>com.gluonhq</groupId>
+        <artifactId>gluonfx-maven-plugin</artifactId>
+        <version>${gluonfx.plugin.version}</version>
+        <configuration>
+          <mainClass>${main.class}</mainClass>
+          <attachList>
+            <list>storage</list>
+            <list>lifecycle</list>
+            <list>connectivity</list>
+            <list>local-notifications</list>
+            <list>display</list>
+          </attachList>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>android</id>
+      <properties>
+        <gluonfx.target>android</gluonfx.target>
+      </properties>
+    </profile>
+    <profile>
+      <id>ios</id>
+      <properties>
+        <gluonfx.target>ios</gluonfx.target>
+      </properties>
+    </profile>
+  </profiles>
+</project>

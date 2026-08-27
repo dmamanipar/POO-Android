@@ -1,0 +1,8 @@
+target/
+.gluonfx/
+*.class
+.idea/
+*.iml
+.vscode/
+config.json
+*.log
