@@ -81,6 +81,22 @@ jobs:
           # GLUON_ANDROID_KEYALIAS: ${{ secrets.GLUON_ANDROID_KEYALIAS }}
           # GLUON_ANDROID_KEYALIAS_PASSWORD: ${{ secrets.GLUON_ANDROID_KEYALIAS_PASSWORD }}
 
+      # gluonfx:package delega el empaquetado final en un proceso Gradle
+      # externo ("package-task") cuyo stdout/stderr NO se imprime en el log
+      # de este job — solo queda escrito en archivos .log dentro de
+      # target/gluonfx/. Sin este paso, un fallo de packaging solo deja ver
+      # "Process package-task failed with result: 1" sin la causa real.
+      - name: Show Gluon package logs on failure
+        if: failure()
+        working-directory: ${{ env.PRESTAMOFACIL_DIR }}
+        run: |
+          echo "Buscando logs de gluonfx..."
+          find target/gluonfx -type f -name "*.log" -print0 | while IFS= read -r -d '' f; do
+            echo "===== $f ====="
+            cat "$f"
+            echo
+          done
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
